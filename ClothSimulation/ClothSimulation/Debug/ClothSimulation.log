@@ -1,0 +1,11 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (3DGameProject.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Source.cpp
+e:\2017\2017 sem2\physics programming\clothsimulation\clothsimulation\source.cpp(65): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+e:\2017\2017 sem2\physics programming\clothsimulation\clothsimulation\source.cpp(65): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+e:\2017\2017 sem2\physics programming\clothsimulation\clothsimulation\source.cpp(66): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+e:\2017\2017 sem2\physics programming\clothsimulation\clothsimulation\source.cpp(66): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+e:\2017\2017 sem2\physics programming\clothsimulation\clothsimulation\source.cpp(84): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\2017\2017 sem2\physics programming\clothsimulation\clothsimulation\source.cpp(90): warning C4305: 'argument': truncation from 'double' to 'float'
+e:\2017\2017 sem2\physics programming\clothsimulation\clothsimulation\source.cpp(141): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+  ClothSimulation.vcxproj -> E:\2017\2017 Sem2\Physics Programming\ClothSimulation\Debug\ClothSimulation.exe
+  ClothSimulation.vcxproj -> E:\2017\2017 Sem2\Physics Programming\ClothSimulation\Debug\ClothSimulation.pdb (Partial PDB)
