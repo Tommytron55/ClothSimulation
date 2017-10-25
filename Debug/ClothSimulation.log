@@ -1,0 +1,10 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (3DGameProject.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Source.cpp
+h:\cloth\clothsimulation\source.cpp(70): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+h:\cloth\clothsimulation\source.cpp(70): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+h:\cloth\clothsimulation\source.cpp(71): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+h:\cloth\clothsimulation\source.cpp(71): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+h:\cloth\clothsimulation\source.cpp(89): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+h:\cloth\clothsimulation\source.cpp(95): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\cloth\clothsimulation\source.cpp(144): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+LINK : fatal error LNK1209: program database 'H:\Cloth\Debug\ClothSimulation.pdb' differs from previous link; relink or rebuild

@@ -1,6 +1,5 @@
 #pragma once
 #include "Constraint.h"
-#include <thread>
 
 class Cloth
 {
@@ -29,7 +28,6 @@ private:
 
 	/* A private method used by drawShaded(), that draws a single triangle p1,p2,p3 with a color*/
 	void drawTriangle(Particle *p1, Particle *p2, Particle *p3, const glm::vec3 color);
-
 
 public:
 
@@ -90,7 +88,6 @@ public:
 	Cloth();
 	~Cloth();
 
-
 	/* drawing the cloth as a smooth shaded (and colored according to column) OpenGL triangular mesh
 	Called from the display() method
 	The cloth is seen as consisting of triangles for four particles in the grid as follows:
@@ -106,7 +103,7 @@ public:
 	/* this is an important methods where the time is progressed one time step for the entire cloth.
 	This includes calling satisfyConstraint() for every constraint, and calling timeStep() for all particles
 	*/
-	void timeStep(float _Damping, GLfloat _DeltaTime, int _ConstraintIterations, int _NumberOfThreads);
+	void timeStep(float _Damping, GLfloat _DeltaTime, int _ConstraintIterations);
 
 	/* used to add gravity (or any other arbitrary vector) to all particles*/
 	void addForce(const glm::vec3 direction);

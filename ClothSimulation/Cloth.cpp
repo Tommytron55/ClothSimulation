@@ -103,48 +103,16 @@ void Cloth::drawShaded()
 /* this is an important methods where the time is progressed one time step for the entire cloth.
 This includes calling satisfyConstraint() for every constraint, and calling timeStep() for all particles
 */
-void SatisfyConstraintsBetween(std::vector<Constraint>& _Constraints,int _startPos, int _EndPos) {
-	for (int i = _startPos; i < _EndPos; i++) {
-		_Constraints[i].satisfyConstraint();
-	}
-}
-
-void Cloth::timeStep(float _Damping, GLfloat _DeltaTime, int _ConstraintIterations, int _NumberOfThreads)
+void Cloth::timeStep(float _Damping, GLfloat _DeltaTime, int _ConstraintIterations)
 {
 	std::vector<Constraint>::iterator constraint;
-
 	for (int i = 0; i<_ConstraintIterations; i++) // iterate over all constraints several times
 	{
-		std::thread* newThread = new std::thread[_NumberOfThreads];
-		int constraintsSize = constraints.size();
-		int NumberPerThread = constraintsSize / _NumberOfThreads;
-
-		//Assign each thread an amount of constraints to work through
-		for (int i = 0; i < _NumberOfThreads; i++) {
-			if (i == _NumberOfThreads - 1) 
-				newThread[i] = std::thread(SatisfyConstraintsBetween, constraints, i*NumberPerThread, constraintsSize);
-			else
-				newThread[i] = std::thread(SatisfyConstraintsBetween, constraints, i*NumberPerThread, (i+1)*NumberPerThread);
+		for (constraint = constraints.begin(); constraint != constraints.end(); constraint++)
+		{
+			(*constraint).satisfyConstraint(); // satisfy constraint.
 		}
-
-		//Join all threads when they are finished
-		for (unsigned int i = 0; i < _NumberOfThreads; ++i) {
-			if (newThread[i].joinable())
-				newThread[i].join();
-		}
-
-		delete[] newThread;
-
-
-		//for (constraint = constraints.begin(); constraint != constraints.end(); constraint++)
-		//{
-		//	(*constraint).satisfyConstraint(); // satisfy constraint.
-		//}
-
-		//SatisfyConstraintsBetween(constraints, 0, constraintsSize);
 	}
-
-	int SizeOfParticles = particles.size();
 
 	std::vector<Particle>::iterator particle;
 	for (particle = particles.begin(); particle != particles.end(); particle++)

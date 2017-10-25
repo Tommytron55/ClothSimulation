@@ -1,0 +1,12 @@
+﻿  MosegaardsClothTutorial.cpp
+e:\2017\2017 sem2\physics programming\cloth\3dgameproject\mosegaardsclothtutorial.cpp(155): warning C4305: 'argument': truncation from 'double' to 'const float'
+e:\2017\2017 sem2\physics programming\cloth\3dgameproject\mosegaardsclothtutorial.cpp(480): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+e:\2017\2017 sem2\physics programming\cloth\3dgameproject\mosegaardsclothtutorial.cpp(480): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+e:\2017\2017 sem2\physics programming\cloth\3dgameproject\mosegaardsclothtutorial.cpp(481): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+e:\2017\2017 sem2\physics programming\cloth\3dgameproject\mosegaardsclothtutorial.cpp(481): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+e:\2017\2017 sem2\physics programming\cloth\3dgameproject\mosegaardsclothtutorial.cpp(499): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\2017\2017 sem2\physics programming\cloth\3dgameproject\mosegaardsclothtutorial.cpp(503): warning C4305: 'argument': truncation from 'double' to 'float'
+e:\2017\2017 sem2\physics programming\cloth\3dgameproject\mosegaardsclothtutorial.cpp(504): warning C4305: 'argument': truncation from 'double' to 'float'
+e:\2017\2017 sem2\physics programming\cloth\3dgameproject\mosegaardsclothtutorial.cpp(556): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+  3DGameProject.vcxproj -> E:\2017\2017 Sem2\Physics Programming\Cloth\Debug\3DGameProject.exe
+  3DGameProject.vcxproj -> E:\2017\2017 Sem2\Physics Programming\Cloth\Debug\3DGameProject.pdb (Partial PDB)
