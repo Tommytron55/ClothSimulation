@@ -31,6 +31,10 @@ public:
 
 	void makeUnmovable();
 
+	void makeMovable();
+
+	bool getMoveable();
+
 	void addToNormal(glm::vec3 normal);
 
 	glm::vec3& getNormal();

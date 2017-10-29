@@ -1,20 +1,21 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (3DGameProject.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+  Cloth.cpp
+f:\school\cloth\clothsimulation\cloth.cpp(191): error C2276: '*': illegal operation on bound member function expression
+f:\school\cloth\clothsimulation\cloth.cpp(209): error C3867: 'Particle::getMoveable': non-standard syntax; use '&' to create a pointer to member
+f:\school\cloth\clothsimulation\cloth.cpp(240): error C3867: 'Particle::getMoveable': non-standard syntax; use '&' to create a pointer to member
+f:\school\cloth\clothsimulation\cloth.cpp(257): error C3867: 'Particle::getMoveable': non-standard syntax; use '&' to create a pointer to member
+  Generating Code...
+  Compiling...
   Source.cpp
-h:\clothst\clothsimulation\source.cpp(86): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-h:\clothst\clothsimulation\source.cpp(86): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-h:\clothst\clothsimulation\source.cpp(87): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-h:\clothst\clothsimulation\source.cpp(87): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-h:\clothst\clothsimulation\source.cpp(111): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-h:\clothst\clothsimulation\source.cpp(113): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-h:\clothst\clothsimulation\source.cpp(119): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-h:\clothst\clothsimulation\source.cpp(121): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-h:\clothst\clothsimulation\source.cpp(127): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-h:\clothst\clothsimulation\source.cpp(129): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-h:\clothst\clothsimulation\source.cpp(135): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-h:\clothst\clothsimulation\source.cpp(137): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-h:\clothst\clothsimulation\source.cpp(147): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-h:\clothst\clothsimulation\source.cpp(153): warning C4305: 'argument': truncation from 'double' to 'float'
-h:\clothst\clothsimulation\source.cpp(202): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-  ClothSimulation.vcxproj -> H:\ClothST\Debug\ClothSimulation.exe
-  ClothSimulation.vcxproj -> H:\ClothST\Debug\ClothSimulation.pdb (Partial PDB)
+f:\school\cloth\clothsimulation\source.cpp(89): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+f:\school\cloth\clothsimulation\source.cpp(89): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+f:\school\cloth\clothsimulation\source.cpp(90): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+f:\school\cloth\clothsimulation\source.cpp(90): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+f:\school\cloth\clothsimulation\source.cpp(115): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+f:\school\cloth\clothsimulation\source.cpp(123): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+f:\school\cloth\clothsimulation\source.cpp(129): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+f:\school\cloth\clothsimulation\source.cpp(137): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+f:\school\cloth\clothsimulation\source.cpp(149): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+f:\school\cloth\clothsimulation\source.cpp(155): warning C4305: 'argument': truncation from 'double' to 'float'
+f:\school\cloth\clothsimulation\source.cpp(204): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+  Generating Code...

@@ -12,7 +12,7 @@ private:
 	std::vector<Particle> particles; // all particles that are part of this cloth
 	std::vector<Constraint> constraints; // alle constraints between particles as part of this cloth
 
-	Particle* getParticle(int x, int y) { return &particles[y*num_particles_width + x]; }
+	//moved the getParticle function to public, so that Ben could usse it in Source.cpp
 	void makeConstraint(Particle *p1, Particle *p2) { constraints.push_back(Constraint(p1, p2)); }
 
 	Utils Util;
@@ -30,58 +30,58 @@ private:
 	void drawTriangle(Particle *p1, Particle *p2, Particle *p3, const glm::vec3 color);
 
 public:
-
+	Particle* getParticle(int x, int y) { return &particles[y*num_particles_width + x]; }
+	int getWidth() { return num_particles_width; }
 	/* This is a important constructor for the entire system of particles and constraints*/
-	Cloth(float width, float height, int num_particles_width, int num_particles_height) : num_particles_width(num_particles_width), num_particles_height(num_particles_height)
+	Cloth(float width, float height, int _num_particles_width, int num_particles_height) : num_particles_width(_num_particles_width), num_particles_height(num_particles_height)
 	{
-		particles.resize(num_particles_width*num_particles_height); //I am essentially using this vector as an array with room for num_particles_width*num_particles_height particles
+		particles.resize(_num_particles_width*num_particles_height); //I am essentially using this vector as an array with room for num_particles_width*num_particles_height particles
 
 																	// creating particles in a grid of particles from (0,0,0) to (width,-height,0)
-		for (int x = 0; x<num_particles_width; x++)
+		for (int x = 0; x<_num_particles_width; x++)
 		{
 			for (int y = 0; y<num_particles_height; y++)
 			{
-				glm::vec3 pos = glm::vec3(width * (x / (float)num_particles_width),
+				glm::vec3 pos = glm::vec3(width * (x / (float)_num_particles_width),
 					-height * (y / (float)num_particles_height),
 					0);
-				particles[y*num_particles_width + x] = Particle(pos); // insert particle in column x at y'th row
+				particles[y*_num_particles_width + x] = Particle(pos); // insert particle in column x at y'th row
 			}
 		}
 
 		// Connecting immediate neighbor particles with constraints (distance 1 and sqrt(2) in the grid)
-		for (int x = 0; x<num_particles_width; x++)
+		for (int x = 0; x<_num_particles_width; x++)
 		{
 			for (int y = 0; y<num_particles_height; y++)
 			{
-				if (x<num_particles_width - 1) makeConstraint(getParticle(x, y), getParticle(x + 1, y));
+				if (x<_num_particles_width - 1) makeConstraint(getParticle(x, y), getParticle(x + 1, y));
 				if (y<num_particles_height - 1) makeConstraint(getParticle(x, y), getParticle(x, y + 1));
-				if (x<num_particles_width - 1 && y<num_particles_height - 1) makeConstraint(getParticle(x, y), getParticle(x + 1, y + 1));
-				if (x<num_particles_width - 1 && y<num_particles_height - 1) makeConstraint(getParticle(x + 1, y), getParticle(x, y + 1));
+				if (x<_num_particles_width - 1 && y<num_particles_height - 1) makeConstraint(getParticle(x, y), getParticle(x + 1, y + 1));
+				if (x<_num_particles_width - 1 && y<num_particles_height - 1) makeConstraint(getParticle(x + 1, y), getParticle(x, y + 1));
 			}
 		}
-
 
 		// Connecting secondary neighbors with constraints (distance 2 and sqrt(4) in the grid)
-		for (int x = 0; x<num_particles_width; x++)
+		for (int x = 0; x<_num_particles_width; x++)
 		{
 			for (int y = 0; y<num_particles_height; y++)
 			{
-				if (x<num_particles_width - 2) makeConstraint(getParticle(x, y), getParticle(x + 2, y));
+				if (x<_num_particles_width - 2) makeConstraint(getParticle(x, y), getParticle(x + 2, y));
 				if (y<num_particles_height - 2) makeConstraint(getParticle(x, y), getParticle(x, y + 2));
-				if (x<num_particles_width - 2 && y<num_particles_height - 2) makeConstraint(getParticle(x, y), getParticle(x + 2, y + 2));
-				if (x<num_particles_width - 2 && y<num_particles_height - 2) makeConstraint(getParticle(x + 2, y), getParticle(x, y + 2));
+				if (x<_num_particles_width - 2 && y<num_particles_height - 2) makeConstraint(getParticle(x, y), getParticle(x + 2, y + 2));
+				if (x<_num_particles_width - 2 && y<num_particles_height - 2) makeConstraint(getParticle(x + 2, y), getParticle(x, y + 2));
 			}
 		}
 
-
 		// making the upper left most three and right most three particles unmovable
-		for (int i = 0; i<3; i++)
+		//Ben: changed to one instead of three when I implemented hooks
+		for (int i = 0; i<1; i++)
 		{
 			getParticle(0 + i, 0)->offsetPos(glm::vec3(0.5, 0.0, 0.0)); // moving the particle a bit towards the center, to make it hang more natural - because I like it ;)
 			getParticle(0 + i, 0)->makeUnmovable();
 
-			getParticle(0 + i, 0)->offsetPos(glm::vec3(-0.5, 0.0, 0.0)); // moving the particle a bit towards the center, to make it hang more natural - because I like it ;)
-			getParticle(num_particles_width - 1 - i, 0)->makeUnmovable();
+			getParticle(_num_particles_width - 1 - i, 0)->offsetPos(glm::vec3(-0.5, 0.0, 0.0)); // moving the particle a bit towards the center, to make it hang more natural - because I like it ;)
+			getParticle(_num_particles_width - 1 - i, 0)->makeUnmovable();
 		}
 	}
 
@@ -117,7 +117,8 @@ public:
 	*/
 	void ballCollision(const glm::vec3 center, const float radius);
 
+	//hook function
+	void DynamicHooks(int _HookCount, bool _MoveOrUnmove);
+
 	void doFrame();
 };
-
-

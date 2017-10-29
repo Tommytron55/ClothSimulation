@@ -40,7 +40,16 @@ void Particle::offsetPos(const glm::vec3 v) {
 }
 
 void Particle::makeUnmovable() {
-	movable = false; 
+	movable = false;
+}
+
+void Particle::makeMovable() {
+	movable = true;
+}
+
+bool Particle::getMoveable()
+{
+	return movable;
 }
 
 void Particle::addToNormal(glm::vec3 normal)
