@@ -1,8 +1,4 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (3DGameProject.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Cloth.cpp
-c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\cloth.h(96): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
-  Compiling...
   Source.cpp
 c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\cloth.h(96): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(81): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
@@ -27,6 +23,5 @@ c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\so
 c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(274): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(281): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(288): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
   ClothSimulation.vcxproj -> C:\Users\Thomas\Documents\repos\Visual Studio\ClothSimulation\Debug\ClothSimulation.exe
   ClothSimulation.vcxproj -> C:\Users\Thomas\Documents\repos\Visual Studio\ClothSimulation\Debug\ClothSimulation.pdb (Partial PDB)

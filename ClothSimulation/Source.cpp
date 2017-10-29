@@ -302,6 +302,10 @@ int main(int argc, char** argv)
 	glutInitWindowSize(1280, 720);
 
 	glutCreateWindow("Cloth Simulation - Thomas Male  - Ben Hart");
+
+	glutSetOption(GLUT_MULTISAMPLE, 8);
+	glEnable(GL_MULTISAMPLE);
+
 	init();
 	glutDisplayFunc(render);
 	glutReshapeFunc(reshape);
