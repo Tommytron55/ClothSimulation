@@ -47,10 +47,6 @@ int g_ClothHeight = 10;
 Cloth* cloth1;
 
 // Just below are three global variables holding the actual animated stuff; Cloth and Ball 
-<<<<<<< HEAD
-Cloth cloth1(14, 10, 21, 15); // one Cloth object of the Cloth class
-=======
->>>>>>> Thomas
 glm::vec3 ball_pos(7, -5, 0); // the center of our one ball
 float ball_radius = 2; // the radius of our one ball
 
@@ -109,21 +105,7 @@ void render(void)
 		switch (Wind_Direction_Var)
 		{
 		case Up:
-<<<<<<< HEAD
-		//	x_rand = rand() % 20;
-		//	x_rand /= -10;
-			z_rand = rand() % 12;
-			z_rand /= -10;
-		//	std::cout << "x: " << x_rand << std::endl;
-			std::cout << "z: " << z_rand << std::endl;
-			break;
-		case Down:
-		//	x_rand = rand() % 20;
-		//	x_rand /= 10;
-			z_rand = rand() % 12;
-			z_rand /= 10;
-		//	std::cout << "x: " << x_rand << std::endl;
-=======
+
 			x_rand = rand() % 20;
 			x_rand /= -10.0f;
 			z_rand = rand() % 12;
@@ -137,34 +119,21 @@ void render(void)
 			z_rand = rand() % 12;
 			z_rand /= 10.0f;
 			std::cout << "x: " << x_rand << std::endl;
->>>>>>> Thomas
 			std::cout << "z: " << z_rand << std::endl;
 			break;
 		case Left:
 			x_rand = rand() % 20;
-<<<<<<< HEAD
-			x_rand /= -10;
-			//y_rand = rand() % 12;
-			//y_rand /= -10;
-=======
 			x_rand /= -10.0f;
 			y_rand = rand() % 12;
 			y_rand /= -10.0f;
->>>>>>> Thomas
 			std::cout << "x: " << x_rand << std::endl;
 			//std::cout << "y: " << y_rand << std::endl;
 			break;
 		case Right:
 			x_rand = rand() % 20;
-<<<<<<< HEAD
-			x_rand /= 10;
-		//	y_rand = rand() % 12;
-		//	y_rand /= 10;
-=======
 			x_rand /= 10.0f;
 			y_rand = rand() % 12;
 			y_rand /= 10.0f;
->>>>>>> Thomas
 			std::cout << "x: " << x_rand << std::endl;
 		//	std::cout << "y: " << y_rand << std::endl;
 			break;
@@ -177,15 +146,11 @@ void render(void)
 
 	//cloth1.addForce(glm::vec3(0, -0.5, 0)*g_DeltaTime); // add gravity each frame, pointing down
 	//cloth1.windForce(glm::vec3(0.25, 0, 0.1)*g_DeltaTime); // generate some wind each frame
-<<<<<<< HEAD
-	cloth1.addForce(glm::vec3(0, -0.5, 0)*g_DeltaTime); // add gravity each frame, pointing down
-	cloth1.windForce(glm::vec3(x_rand, y_rand, z_rand)*g_DeltaTime); // generate some wind each frame
-	cloth1.timeStep(DAMPING, g_DeltaTime, CONSTRAINT_ITERATIONS); // calculate the particle positions of the next frame
-=======
+
 	cloth1->addForce(glm::vec3(0, -9.81f, 0)*g_DeltaTime * 0.5f); // add gravity each frame, pointing down
 	cloth1->windForce(glm::vec3(x_rand, y_rand, z_rand)*g_DeltaTime * 2.0f); // generate some wind each frame
 	cloth1->timeStep(DAMPING, g_DeltaTime, CONSTRAINT_ITERATIONS); // calculate the particle positions of the next frame
->>>>>>> Thomas
+
 	//cloth1.ballCollision(ball_pos, ball_radius); // resolve collision with the ball
 
 												 // drawing
@@ -205,13 +170,8 @@ void render(void)
 	glEnable(GL_LIGHTING);
 
 	glTranslatef(-6.5, 6, -9.0f); // move camera out and center on the cloth
-<<<<<<< HEAD
-	//glRotatef(25, 0, 1, 0); // rotate a bit to see the cloth from the side
-	cloth1.drawShaded(); // finally draw the cloth with smooth shading
-=======
 	glRotatef(25, 0, 1, 0); // rotate a bit to see the cloth from the side
 	cloth1->drawShaded(); // finally draw the cloth with smooth shading
->>>>>>> Thomas
 
 	//glPushMatrix(); // to draw the ball we use glutSolidSphere, and need to draw the sphere at the position of the ball
 	//glTranslatef(ball_pos.x, ball_pos.y, ball_pos.z); // hence the translation of the sphere onto the ball position
@@ -289,34 +249,6 @@ void keyboard(unsigned char key, int x, int y)
 			delete cloth1;
 			cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class
 		}
-		break;
-	//Hooks
-	case 120: //x
-		i_HookCount++;
-		if (i_HookCount > 19)
-		{
-			i_HookCount = 19;
-		}
-		//above check is to make sure that at most there are 20 hooks. Since the below check does a - 1, cap is set at 19 because if my math isnt wrong 20 - 1 - 19 = 0
-		//the - 1 isnt in atm but im leaving the cap at 19 incase its added later
-		//for later ben: the reason nothing appears on the left side is because you never set that side to unmovable
-		//find a way to make the code scan along the top row of the particle vector until it finds unmovable nodes
-		//then find the mid point between that node and the initial node
-		//you also need to have the code recognise that an odd number means that the middle needs an unmovable node
-		//cloth1.getParticle(cloth1.getWidth() - (cloth1.getWidth() / (i_HookCount)), 0)->makeUnmovable();
-		cloth1.DynamicHooks(i_HookCount, true);
-		std::cout << "i_HookCount: " << i_HookCount << std::endl;
-
-		break;
-	case 122: //z
-		i_HookCount--;
-		if (i_HookCount < 2)
-		{
-			i_HookCount = 2;
-		}
-		cloth1.DynamicHooks(i_HookCount, false);
-		std::cout << "i_HookCount: " << i_HookCount - 1 << std::endl;
-
 		break;
 	default:
 		break;
