@@ -30,7 +30,7 @@
 
 /* Some physics constants */
 #define DAMPING 0.02 // how much to damp the cloth simulation each frame
-#define CONSTRAINT_ITERATIONS 10 // how many iterations of constraint satisfaction each frame (more is rigid, less is soft)
+#define CONSTRAINT_ITERATIONS 5 // how many iterations of constraint satisfaction each frame (more is rigid, less is soft)
 
 //Used for calculating a Delta time (In seconds)
 GLfloat g_OldTime;
@@ -39,34 +39,31 @@ GLfloat g_DeltaTime;
 
 Utils g_Util;
 
+int g_numOfHooks = 4;
+int g_ParticlesWidthNum = 20;
+int g_ParticlesHeightNum = 15;
+int g_ClothWidth = 14;
+int g_ClothHeight = 10;
+Cloth* cloth1;
+
 // Just below are three global variables holding the actual animated stuff; Cloth and Ball 
+<<<<<<< HEAD
 Cloth cloth1(14, 10, 21, 15); // one Cloth object of the Cloth class
+=======
+>>>>>>> Thomas
 glm::vec3 ball_pos(7, -5, 0); // the center of our one ball
 float ball_radius = 2; // the radius of our one ball
 
 //Vars for wind direction, on/off etc
 enum Wind_Direction {Up = 1, Down, Left, Right};
 Wind_Direction Wind_Direction_Var = Down;
-bool Wind_On = false;
+bool Wind_On = true;
 
 //Vars for hooks
 int i_HookCount = 2;
 
 //Below: keystate stuff from past projects
 
-/*#define BUTTON_UP 0
-#define BUTTON_DOWN 1
-unsigned char keyState[255];
-void keyboard(unsigned char key, int x, int y) {
-	keyState[key] = BUTTON_DOWN;
-}
-void keyboard_up(unsigned char key, int x, int y) {
-	keyState[key] = BUTTON_UP;
-}
-if (keyState[(unsigned char)'2'] == BUTTON_DOWN)
-{
-
-}//*/
 
 void init(GLvoid)
 {
@@ -84,6 +81,8 @@ void init(GLvoid)
 	glLightfv(GL_LIGHT0, GL_POSITION, (GLfloat *)&lightPos);
 
 	glEnable(GL_LIGHT1);
+
+	cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class
 
 	GLfloat lightAmbient1[4] = { 0.0,0.0,0.0,0.0 };
 	GLfloat lightPos1[4] = { 1.0,0.0,-0.2,0.0 };
@@ -110,6 +109,7 @@ void render(void)
 		switch (Wind_Direction_Var)
 		{
 		case Up:
+<<<<<<< HEAD
 		//	x_rand = rand() % 20;
 		//	x_rand /= -10;
 			z_rand = rand() % 12;
@@ -123,21 +123,48 @@ void render(void)
 			z_rand = rand() % 12;
 			z_rand /= 10;
 		//	std::cout << "x: " << x_rand << std::endl;
+=======
+			x_rand = rand() % 20;
+			x_rand /= -10.0f;
+			z_rand = rand() % 12;
+			z_rand /= -10.0f;
+			std::cout << "x: " << x_rand << std::endl;
+			std::cout << "z: " << z_rand << std::endl;
+			break;
+		case Down:
+			x_rand = rand() % 20;
+			x_rand /= 10.0f;
+			z_rand = rand() % 12;
+			z_rand /= 10.0f;
+			std::cout << "x: " << x_rand << std::endl;
+>>>>>>> Thomas
 			std::cout << "z: " << z_rand << std::endl;
 			break;
 		case Left:
 			x_rand = rand() % 20;
+<<<<<<< HEAD
 			x_rand /= -10;
 			//y_rand = rand() % 12;
 			//y_rand /= -10;
+=======
+			x_rand /= -10.0f;
+			y_rand = rand() % 12;
+			y_rand /= -10.0f;
+>>>>>>> Thomas
 			std::cout << "x: " << x_rand << std::endl;
 			//std::cout << "y: " << y_rand << std::endl;
 			break;
 		case Right:
 			x_rand = rand() % 20;
+<<<<<<< HEAD
 			x_rand /= 10;
 		//	y_rand = rand() % 12;
 		//	y_rand /= 10;
+=======
+			x_rand /= 10.0f;
+			y_rand = rand() % 12;
+			y_rand /= 10.0f;
+>>>>>>> Thomas
 			std::cout << "x: " << x_rand << std::endl;
 		//	std::cout << "y: " << y_rand << std::endl;
 			break;
@@ -148,11 +175,17 @@ void render(void)
 	ball_time++;
 	ball_pos.z = cos(ball_time / 50.0) * 7;
 
-	//cloth1.addForce(Vec3(0, -0.2, 0)*TIME_STEPSIZE2); // add gravity each frame, pointing down
+	//cloth1.addForce(glm::vec3(0, -0.5, 0)*g_DeltaTime); // add gravity each frame, pointing down
 	//cloth1.windForce(glm::vec3(0.25, 0, 0.1)*g_DeltaTime); // generate some wind each frame
+<<<<<<< HEAD
 	cloth1.addForce(glm::vec3(0, -0.5, 0)*g_DeltaTime); // add gravity each frame, pointing down
 	cloth1.windForce(glm::vec3(x_rand, y_rand, z_rand)*g_DeltaTime); // generate some wind each frame
 	cloth1.timeStep(DAMPING, g_DeltaTime, CONSTRAINT_ITERATIONS); // calculate the particle positions of the next frame
+=======
+	cloth1->addForce(glm::vec3(0, -9.81f, 0)*g_DeltaTime * 0.5f); // add gravity each frame, pointing down
+	cloth1->windForce(glm::vec3(x_rand, y_rand, z_rand)*g_DeltaTime * 2.0f); // generate some wind each frame
+	cloth1->timeStep(DAMPING, g_DeltaTime, CONSTRAINT_ITERATIONS); // calculate the particle positions of the next frame
+>>>>>>> Thomas
 	//cloth1.ballCollision(ball_pos, ball_radius); // resolve collision with the ball
 
 												 // drawing
@@ -172,8 +205,13 @@ void render(void)
 	glEnable(GL_LIGHTING);
 
 	glTranslatef(-6.5, 6, -9.0f); // move camera out and center on the cloth
+<<<<<<< HEAD
 	//glRotatef(25, 0, 1, 0); // rotate a bit to see the cloth from the side
 	cloth1.drawShaded(); // finally draw the cloth with smooth shading
+=======
+	glRotatef(25, 0, 1, 0); // rotate a bit to see the cloth from the side
+	cloth1->drawShaded(); // finally draw the cloth with smooth shading
+>>>>>>> Thomas
 
 	//glPushMatrix(); // to draw the ball we use glutSolidSphere, and need to draw the sphere at the position of the ball
 	//glTranslatef(ball_pos.x, ball_pos.y, ball_pos.z); // hence the translation of the sphere onto the ball position
@@ -219,24 +257,37 @@ void keyboard(unsigned char key, int x, int y)
 	//Wind
 	case 119: //w
 		Wind_Direction_Var = Up;
+		std::cout << "W - Pressed" << std::endl;
 		break;
 	case 115: //s
 		Wind_Direction_Var = Down;
+		std::cout << "S - Pressed" << std::endl;
 		break;
 	case 97: //a
 		Wind_Direction_Var = Left;
+		std::cout << "A - Pressed" << std::endl;
 		break;
 	case 100: //d
 		Wind_Direction_Var = Right;
+		std::cout << "D - Pressed" << std::endl;
 		break;
 	case 99: //c
-		if (Wind_On)
-		{
-			Wind_On = false;
+		Wind_On = !Wind_On;
+		break;
+	case 61: // =
+		std::cout << "= - Pressed" << std::endl;
+		if (g_numOfHooks < g_ParticlesWidthNum) {
+			g_numOfHooks++;
+			delete cloth1;
+			cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class
 		}
-		else
-		{
-			Wind_On = true;
+		break;
+	case 45: // -
+		std::cout << "- - Pressed" << std::endl;
+		if (g_numOfHooks > 2) {
+			g_numOfHooks--;
+			delete cloth1;
+			cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class
 		}
 		break;
 	//Hooks
@@ -275,11 +326,35 @@ void keyboard(unsigned char key, int x, int y)
 void arrow_keys(int a_keys, int x, int y)
 {
 	switch (a_keys) {
-	case GLUT_KEY_UP:
-		glutFullScreen();
-		break;
 	case GLUT_KEY_DOWN:
-		glutReshapeWindow(1280, 720);
+		//glutFullScreen();
+		if (g_ClothHeight < 20) {
+			g_ClothHeight++;
+			delete cloth1;
+			cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class
+		}
+		break;
+	case GLUT_KEY_UP:
+		//glutReshapeWindow(1280, 720);
+		if (g_ClothHeight > 10) {
+			g_ClothHeight--;
+			delete cloth1;
+			cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class
+		}
+		break;
+	case GLUT_KEY_RIGHT:
+		if (g_ClothWidth < 20) {
+			g_ClothWidth++;
+			delete cloth1;
+			cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class
+		}
+		break;
+	case GLUT_KEY_LEFT:
+		if (g_ClothWidth > 10) {
+			g_ClothWidth--;
+			delete cloth1;
+			cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class
+		}
 		break;
 	default:
 		break;
@@ -303,4 +378,6 @@ int main(int argc, char** argv)
 	glutIdleFunc(update);
 
 	glutMainLoop();
+
+	delete cloth1;
 }

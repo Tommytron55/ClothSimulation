@@ -1,4 +1,5 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (3DGameProject.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+<<<<<<< HEAD
   Cloth.cpp
 f:\school\cloth\clothsimulation\cloth.cpp(191): error C2276: '*': illegal operation on bound member function expression
 f:\school\cloth\clothsimulation\cloth.cpp(209): error C3867: 'Particle::getMoveable': non-standard syntax; use '&' to create a pointer to member
@@ -19,3 +20,31 @@ f:\school\cloth\clothsimulation\source.cpp(149): warning C4244: '=': conversion 
 f:\school\cloth\clothsimulation\source.cpp(155): warning C4305: 'argument': truncation from 'double' to 'float'
 f:\school\cloth\clothsimulation\source.cpp(204): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
   Generating Code...
+=======
+  Source.cpp
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\cloth.h(98): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(78): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(81): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(81): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(82): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(82): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(106): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(108): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(114): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(116): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(122): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(124): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(130): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(132): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(142): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(148): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(197): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(236): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(244): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(260): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(268): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(275): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\thomas\documents\repos\visual studio\clothsimulation\clothsimulation\source.cpp(282): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ClothSimulation.vcxproj -> C:\Users\Thomas\Documents\repos\Visual Studio\ClothSimulation\Debug\ClothSimulation.exe
+  ClothSimulation.vcxproj -> C:\Users\Thomas\Documents\repos\Visual Studio\ClothSimulation\Debug\ClothSimulation.pdb (Partial PDB)
+>>>>>>> Thomas

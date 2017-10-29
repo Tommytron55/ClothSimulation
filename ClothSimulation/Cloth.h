@@ -33,7 +33,11 @@ public:
 	Particle* getParticle(int x, int y) { return &particles[y*num_particles_width + x]; }
 	int getWidth() { return num_particles_width; }
 	/* This is a important constructor for the entire system of particles and constraints*/
+<<<<<<< HEAD
 	Cloth(float width, float height, int _num_particles_width, int num_particles_height) : num_particles_width(_num_particles_width), num_particles_height(num_particles_height)
+=======
+	Cloth(float width, float height, int num_particles_width, int num_particles_height, int num_hooks) : num_particles_width(num_particles_width), num_particles_height(num_particles_height)
+>>>>>>> Thomas
 	{
 		particles.resize(_num_particles_width*num_particles_height); //I am essentially using this vector as an array with room for num_particles_width*num_particles_height particles
 
@@ -73,6 +77,7 @@ public:
 			}
 		}
 
+<<<<<<< HEAD
 		// making the upper left most three and right most three particles unmovable
 		//Ben: changed to one instead of three when I implemented hooks
 		for (int i = 0; i<1; i++)
@@ -82,6 +87,35 @@ public:
 
 			getParticle(_num_particles_width - 1 - i, 0)->offsetPos(glm::vec3(-0.5, 0.0, 0.0)); // moving the particle a bit towards the center, to make it hang more natural - because I like it ;)
 			getParticle(_num_particles_width - 1 - i, 0)->makeUnmovable();
+=======
+		//Make the top left and top right corners immovable
+
+		//getParticle(0 + i, 0)->offsetPos(glm::vec3(0.25, 0.0, 0.0)); // moving the particle a bit towards the center, to make it hang more natural
+		//Top Left
+		getParticle(0, 0)->makeUnmovable();
+		getParticle(1, 0)->makeUnmovable();
+		getParticle(0, 1)->makeUnmovable();
+
+		//getParticle(num_particles_width - 1 - i, 0)->offsetPos(glm::vec3(-0.25, 0.0, 0.0));
+		//Top Right
+		getParticle(num_particles_width - 1, 0)->makeUnmovable();
+		getParticle(num_particles_width - 1 - 1, 0)->makeUnmovable();
+		getParticle(num_particles_width - 1, 1)->makeUnmovable();
+
+
+		//Calculate and create extra hooks
+		if (num_hooks > 2) {
+			float LengthBetweenHooks = (float)num_particles_width / (float)(num_hooks - 1);
+
+			//for each hook that isnt the courners, itterate through them making them un movable;
+			for (int i = 0; i < num_hooks - 2; i++) {
+				//Particle at the top of the hook (-1 as the cloth is 0 based)
+				int TopParticle = glm::round((i + 1) * LengthBetweenHooks) - 1;
+				getParticle(TopParticle, 0)->makeUnmovable();
+				getParticle(TopParticle + 1, 1)->makeUnmovable();
+				getParticle(TopParticle - 1, 1)->makeUnmovable();
+			}
+>>>>>>> Thomas
 		}
 	}
 

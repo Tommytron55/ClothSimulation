@@ -1,2 +1,6 @@
 #TargetFrameworkVersion=v4.0:PlatformToolSet=v140:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=8.1
+<<<<<<< HEAD
 Debug|Win32|F:\School\Cloth\|
+=======
+Debug|Win32|C:\Users\Thomas\Documents\repos\Visual Studio\ClothSimulation\|
+>>>>>>> Thomas

@@ -127,9 +127,8 @@ void Cloth::addForce(const glm::vec3 direction)
 	std::vector<Particle>::iterator particle;
 	for (particle = particles.begin(); particle != particles.end(); particle++)
 	{
-		(*particle).addForce(direction); // add the forces to each particle
+		(particle)->addForce(direction); // add the forces to each particle
 	}
-
 }
 
 /* used to add wind forces to all particles, is added for each triangle since the final force is proportional to the triangle area as seen from the wind direction*/
