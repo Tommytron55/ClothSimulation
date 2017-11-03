@@ -88,10 +88,16 @@ void Cloth::drawShaded()
 		for (int y = 0; y<num_particles_height - 1; y++)
 		{
 			glm::vec3 color(0, 0, 0);
-			if (x % 2) // red and white color is interleaved according to which column number
-				color = glm::vec3(0.6f, 0.2f, 0.2f);
+			/*if (x % 7 == 0) // red and white color is interleaved according to which column number
+			//	color = glm::vec3(0.6f, 0.2f, 0.6f);
+			//else if (x % 5 == 0) // red and white color is interleaved according to which column number
+			//	color = glm::vec3(0.6f, 0.6f, 0.2f);
+			else*/ if (x % 3 == 0) // red and white color is interleaved according to which column number
+				color = glm::vec3(0.2f, 0.6f, 0.2f);
+			else if (x % 2 == 0) // red and white color is interleaved according to which column number
+				color = glm::vec3(0.2f, 0.4f, 0.4f);
 			else
-				color = glm::vec3(1.0f, 1.0f, 1.0f);
+				color = glm::vec3(0.2f, 0.2f, 0.6f);
 
 			drawTriangle(getParticle(x + 1, y), getParticle(x, y), getParticle(x, y + 1), color);
 			drawTriangle(getParticle(x + 1, y + 1), getParticle(x + 1, y), getParticle(x, y + 1), color);
@@ -158,6 +164,158 @@ void Cloth::ballCollision(const glm::vec3 center, const float radius)
 		if (length < radius) // if the particle is inside the ball
 		{
 			(*particle).offsetPos(Util.ScaleVec3(glm::normalize(v), (radius - length))); // project the particle to the surface of the ball
+		}
+	}
+}
+
+static float randFloat(float min, float max) {
+	float r = (float)rand() / (double)RAND_MAX;
+	return min + r * (max - min);
+}
+
+void Cloth::groundCollision(float _GroundHeight) {
+	int iCounter = 1;
+	int TotalCount = num_particles_width * (num_particles_height - 1);
+	std::vector<Particle>::iterator particle;
+	for (particle = particles.begin(); particle != particles.end(); particle++)
+	{
+		if (iCounter > TotalCount)
+		{
+			if (particle->getPos().y < _GroundHeight) {
+				if (!(*particle).getCollided())
+				{
+					(*particle).offsetPos(glm::vec3(0.0f, _GroundHeight - particle->getPos().y, -0.5f));
+					(*particle).setCollided();
+				}
+				else
+				{
+					(*particle).offsetPos(glm::vec3(0.0f, _GroundHeight - particle->getPos().y, -0.0f));
+				}
+			}
+		}
+		else
+		{
+			if (particle->getPos().y < _GroundHeight) {
+				(*particle).offsetPos(glm::vec3(0.0f, _GroundHeight - particle->getPos().y, -0.0f));
+			}
+		}
+		iCounter++;
+	}
+}
+
+void Cloth::dropIt() {
+	int iCounter = 1;
+	int TotalCount = num_particles_width * 2;
+	std::vector<Particle>::iterator particle;
+	for (particle = particles.begin(); particle != particles.end(); particle++)
+	{
+		particle->makeMovable();
+		if (iCounter >= TotalCount)
+			break;
+
+		iCounter++;
+	}
+}
+
+
+void Cloth::IncrementHookWidth(GLfloat _DeltaTime, float _Speed) {
+
+	//Top Left
+	float Distance = (m_Width / 2.0f) - getParticle(0, 0)->getPos().x;
+	float Scale = Distance / (m_Width / 2.0f);
+	getParticle(0, 0)->offsetUnmovable(glm::vec3(Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+	Distance = (m_Width / 2.0f) - getParticle(1, 0)->getPos().x;
+	Scale = Distance / (m_Width / 2.0f);
+	getParticle(1, 0)->offsetUnmovable(glm::vec3(Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+	Distance = (m_Width / 2.0f) - getParticle(0, 1)->getPos().x;
+	Scale = Distance / (m_Width / 2.0f);
+	getParticle(0, 1)->offsetUnmovable(glm::vec3(Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+	//Top Right
+	Distance = (m_Width / 2.0f) - getParticle(num_particles_width - 1, 0)->getPos().x;
+	Scale = Distance / (m_Width / 2.0f);
+	getParticle(num_particles_width - 1, 0)->offsetUnmovable(glm::vec3(Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+	Distance = (m_Width / 2.0f) - getParticle(num_particles_width - 1 -1, 0)->getPos().x;
+	Scale = Distance / (m_Width / 2.0f);
+	getParticle(num_particles_width - 1 - 1, 0)->offsetUnmovable(glm::vec3(Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+	Distance = (m_Width / 2.0f) - getParticle(num_particles_width - 1, 1)->getPos().x;
+	Scale = Distance / (m_Width / 2.0f);
+	getParticle(num_particles_width - 1, 1)->offsetUnmovable(glm::vec3(Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+
+	if (m_num_hooks >= 2) {
+		float LengthBetweenHooks = (float)num_particles_width / (float)(m_num_hooks - 1);
+
+		//for each hook that isnt the courners, itterate through them making them un movable;
+		for (int i = 0; i < m_num_hooks - 2; i++) {
+			//Particle at the top of the hook (-1 as the cloth is 0 based)
+			int TopParticle = glm::round((i + 1) * LengthBetweenHooks) - 1;
+			Distance = (m_Width / 2.0f) - getParticle(TopParticle, 0)->getPos().x;
+			Scale = Distance / (m_Width / 2.0f);
+			getParticle(TopParticle, 0)->offsetUnmovable(glm::vec3(Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+			Distance = (m_Width / 2.0f) - getParticle(TopParticle + 1, 1)->getPos().x;
+			Scale = Distance / (m_Width / 2.0f);
+			getParticle(TopParticle + 1, 1)->offsetUnmovable(glm::vec3(Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+			Distance = (m_Width / 2.0f) - getParticle(TopParticle - 1, 1)->getPos().x;
+			Scale = Distance / (m_Width / 2.0f);
+			getParticle(TopParticle - 1, 1)->offsetUnmovable(glm::vec3(Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+		}
+	}
+}
+
+
+void Cloth::DecrementHookWidth(GLfloat _DeltaTime, float _Speed) {
+
+	//Top Left
+	float Distance = (m_Width / 2.0f) - getParticle(0, 0)->getPos().x;
+	float Scale = Distance / (m_Width / 2.0f);
+	getParticle(0, 0)->offsetUnmovable(glm::vec3(-Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+	Distance = (m_Width / 2.0f) - getParticle(1, 0)->getPos().x;
+	Scale = Distance / (m_Width / 2.0f);
+	getParticle(1, 0)->offsetUnmovable(glm::vec3(-Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+	Distance = (m_Width / 2.0f) - getParticle(0, 1)->getPos().x;
+	Scale = Distance / (m_Width / 2.0f);
+	getParticle(0, 1)->offsetUnmovable(glm::vec3(-Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+	//Top Right
+	Distance = (m_Width / 2.0f) - getParticle(num_particles_width - 1, 0)->getPos().x;
+	Scale = Distance / (m_Width / 2.0f);
+	getParticle(num_particles_width - 1, 0)->offsetUnmovable(glm::vec3(-Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+	Distance = (m_Width / 2.0f) - getParticle(num_particles_width - 1 - 1, 0)->getPos().x;
+	Scale = Distance / (m_Width / 2.0f);
+	getParticle(num_particles_width - 1 - 1, 0)->offsetUnmovable(glm::vec3(-Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+	Distance = (m_Width / 2.0f) - getParticle(num_particles_width - 1, 1)->getPos().x;
+	Scale = Distance / (m_Width / 2.0f);
+	getParticle(num_particles_width - 1, 1)->offsetUnmovable(glm::vec3(-Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+	if (m_num_hooks >= 2) {
+		float LengthBetweenHooks = (float)num_particles_width / (float)(m_num_hooks - 1);
+
+		//for each hook that isnt the courners, itterate through them making them un movable;
+		for (int i = 0; i < m_num_hooks - 2; i++) {
+			//Particle at the top of the hook (-1 as the cloth is 0 based)
+			int TopParticle = glm::round((i + 1) * LengthBetweenHooks) - 1;
+			float Distance = (m_Width / 2.0f) - getParticle(TopParticle, 0)->getPos().x;
+			float Scale = Distance / (m_Width / 2.0f);
+			getParticle(TopParticle, 0)->offsetUnmovable(glm::vec3(-Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+			Distance = (m_Width / 2.0f) - getParticle(TopParticle + 1, 1)->getPos().x;
+			Scale = Distance / (m_Width / 2.0f);
+			getParticle(TopParticle + 1, 1)->offsetUnmovable(glm::vec3(-Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
+
+			Distance = (m_Width / 2.0f) - getParticle(TopParticle - 1, 1)->getPos().x;
+			Scale = Distance / (m_Width / 2.0f);
+			getParticle(TopParticle - 1, 1)->offsetUnmovable(glm::vec3(-Scale * _DeltaTime * _Speed, 0.0f, 0.0f));
 		}
 	}
 }

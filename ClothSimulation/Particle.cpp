@@ -34,6 +34,10 @@ void Particle::resetAcceleration() {
 	acceleration = glm::vec3(0, 0, 0);
 }
 
+void Particle::offsetUnmovable(const glm::vec3 v) {
+		pos += v;
+}
+
 void Particle::offsetPos(const glm::vec3 v) {
 	if (movable) 
 		pos += v; 

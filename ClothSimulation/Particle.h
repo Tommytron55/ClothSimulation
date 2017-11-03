@@ -11,9 +11,10 @@ private:
 	glm::vec3 old_pos; // the position of the particle in the previous time step, used as part of the verlet numerical integration scheme
 	glm::vec3 acceleration; // a vector representing the current acceleration of the particle
 	glm::vec3 accumulated_normal; // an accumulated normal (i.e. non normalized), used for OpenGL soft shading
+	bool CollidedWithGround = false;
 
 public:
-	Particle(glm::vec3 pos) : pos(pos), old_pos(pos), acceleration(glm::vec3(0, 0, 0)), mass(1), movable(true), accumulated_normal(glm::vec3(0, 0, 0)) {}
+	Particle(glm::vec3 pos) : pos(pos), old_pos(pos), acceleration(glm::vec3(0, 0, 0)), mass(1.0f), movable(true), accumulated_normal(glm::vec3(0, 0, 0)) {}
 	Particle();
 	~Particle();
 
@@ -29,6 +30,8 @@ public:
 
 	void offsetPos(const glm::vec3 v);
 
+	void offsetUnmovable(const glm::vec3 v);
+
 	void makeUnmovable();
 
 	void makeMovable();
@@ -41,4 +44,6 @@ public:
 
 	void resetNormal();
 
+	bool getCollided() { return CollidedWithGround; }
+	void setCollided() { CollidedWithGround = true; }
 };

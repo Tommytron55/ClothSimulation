@@ -30,7 +30,7 @@
 
 /* Some physics constants */
 #define DAMPING 0.02 // how much to damp the cloth simulation each frame
-#define CONSTRAINT_ITERATIONS 5 // how many iterations of constraint satisfaction each frame (more is rigid, less is soft)
+#define CONSTRAINT_ITERATIONS 3 // how many iterations of constraint satisfaction each frame (more is rigid, less is soft)
 
 //Used for calculating a Delta time (In seconds)
 GLfloat g_OldTime;
@@ -38,6 +38,8 @@ GLfloat g_NewTime;
 GLfloat g_DeltaTime;
 
 Utils g_Util;
+
+bool RenderBall = false;
 
 int g_numOfHooks = 4;
 int g_ParticlesWidthNum = 20;
@@ -91,7 +93,7 @@ void init(GLvoid)
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 }
 
-float ball_time = 0; // counter for used to calculate the z position of the ball below
+GLfloat ball_time = 0; // counter for used to calculate the z position of the ball below
 
 					 /* display method called each frame*/
 void render(void)
@@ -141,8 +143,7 @@ void render(void)
 			break;
 		}
 	}
-	ball_time++;
-	ball_pos.z = cos(ball_time / 50.0) * 7;
+	
 
 	//cloth1.addForce(glm::vec3(0, -0.5, 0)*g_DeltaTime); // add gravity each frame, pointing down
 	//cloth1.windForce(glm::vec3(0.25, 0, 0.1)*g_DeltaTime); // generate some wind each frame
@@ -151,7 +152,7 @@ void render(void)
 	cloth1->windForce(glm::vec3(x_rand, y_rand, z_rand)*g_DeltaTime * 2.0f); // generate some wind each frame
 	cloth1->timeStep(DAMPING, g_DeltaTime, CONSTRAINT_ITERATIONS); // calculate the particle positions of the next frame
 
-	//cloth1.ballCollision(ball_pos, ball_radius); // resolve collision with the ball
+	cloth1->groundCollision(-15.0f);
 
 												 // drawing
 
@@ -160,25 +161,40 @@ void render(void)
 
 	glDisable(GL_LIGHTING); // drawing some smooth shaded background - because I like it ;)
 	glBegin(GL_POLYGON);
-	glColor3f(0.8f, 0.8f, 1.0f);
+	glColor3f(1.0f, 0.8f, 0.2f);
 	glVertex3f(-200.0f, -100.0f, -100.0f);
 	glVertex3f(200.0f, -100.0f, -100.0f);
-	glColor3f(0.4f, 0.4f, 0.8f);
+	glColor3f(0.6f, 0.3f, 1.25f);
 	glVertex3f(200.0f, 100.0f, -100.0f);
 	glVertex3f(-200.0f, 100.0f, -100.0f);
 	glEnd();
 	glEnable(GL_LIGHTING);
 
-	glTranslatef(-6.5, 6, -9.0f); // move camera out and center on the cloth
-	glRotatef(25, 0, 1, 0); // rotate a bit to see the cloth from the side
+	glTranslatef(-6.5, 6, -15.0f); // move camera out and center on the cloth
+	//glRotatef(25, 0, 1, 0); // rotate a bit to see the cloth from the side
 	cloth1->drawShaded(); // finally draw the cloth with smooth shading
 
-	//glPushMatrix(); // to draw the ball we use glutSolidSphere, and need to draw the sphere at the position of the ball
-	//glTranslatef(ball_pos.x, ball_pos.y, ball_pos.z); // hence the translation of the sphere onto the ball position
-	//glColor3f(0.4f, 0.8f, 0.5f);
-	//glutSolidSphere(ball_radius - 0.1, 50, 50); // draw the ball, but with a slightly lower radius, otherwise we could get ugly visual artifacts of cloth penetrating the ball slightly
-	//glPopMatrix();
+	if (RenderBall)
+	{
+		ball_time += g_DeltaTime;
+		ball_pos.z = cos(ball_time / 2.0f) * 10.0f;
+		//ball_pos.z = cos(ball_time * (180.0f / 30.0f)) * 7;
 
+		if (ball_pos.z <= -9.9f)
+		{
+			ball_time = 0.0f;
+			ball_pos.z = 0.0f;
+		}
+
+		cloth1->ballCollision(ball_pos, ball_radius); // resolve collision with the ball
+
+		glPushMatrix(); // to draw the ball we use glutSolidSphere, and need to draw the sphere at the position of the ball
+		glTranslatef(ball_pos.x, ball_pos.y, ball_pos.z); // hence the translation of the sphere onto the ball position
+		glColor3f(0.8f, 0.4f, 0.2f);
+		glutSolidSphere(ball_radius - 0.1, 50, 50); // draw the ball, but with a slightly lower radius, otherwise we could get ugly visual artifacts of cloth penetrating the ball slightly
+		glPopMatrix();
+	
+	}
 	glutSwapBuffers();
 	glutPostRedisplay();
 }
@@ -250,6 +266,26 @@ void keyboard(unsigned char key, int x, int y)
 			cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class
 		}
 		break;
+
+	case 32: // space
+		std::cout << "Space - Pressed" << std::endl;
+		cloth1->dropIt();
+		break;
+
+	case 44: // ,
+		std::cout << ", - Pressed" << std::endl;
+		cloth1->IncrementHookWidth(g_DeltaTime, 10.0f);
+		break;
+
+	case 46: // .
+		std::cout << ". - Pressed" << std::endl;
+		cloth1->DecrementHookWidth(g_DeltaTime, 10.0f);
+		break;
+
+	case 98: //w
+		RenderBall = !RenderBall;
+		std::cout << "B - Pressed" << std::endl;
+		break;
 	default:
 		break;
 	}
@@ -260,7 +296,7 @@ void arrow_keys(int a_keys, int x, int y)
 	switch (a_keys) {
 	case GLUT_KEY_DOWN:
 		//glutFullScreen();
-		if (g_ClothHeight < 20) {
+		if (g_ClothHeight < 16) {
 			g_ClothHeight++;
 			delete cloth1;
 			cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class

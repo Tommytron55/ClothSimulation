@@ -8,6 +8,8 @@ private:
 	int num_particles_width; // number of particles in "width" direction
 	int num_particles_height; // number of particles in "height" direction
 							  // total number of particles is num_particles_width*num_particles_height
+	int m_num_hooks;
+	float m_Width;
 
 	std::vector<Particle> particles; // all particles that are part of this cloth
 	std::vector<Constraint> constraints; // alle constraints between particles as part of this cloth
@@ -32,9 +34,12 @@ private:
 public:
 	Particle* getParticle(int x, int y) { return &particles[y*num_particles_width + x]; }
 	int getWidth() { return num_particles_width; }
+
 	/* This is a important constructor for the entire system of particles and constraints*/
 	Cloth(float width, float height, int num_particles_width, int num_particles_height, int num_hooks) : num_particles_width(num_particles_width), num_particles_height(num_particles_height)
 	{
+		m_num_hooks = num_hooks;
+		m_Width = width;
 		particles.resize(num_particles_width*num_particles_height); //I am essentially using this vector as an array with room for num_particles_width*num_particles_height particles
 
 		// creating particles in a grid of particles from (0,0,0) to (width,-height,0)
@@ -133,6 +138,12 @@ public:
 	*/
 	void ballCollision(const glm::vec3 center, const float radius);
 
+	void groundCollision(float _GroundHeight);
+
+	void dropIt();
+
+	void IncrementHookWidth(GLfloat _DeltaTime, float _Speed);
+	void DecrementHookWidth(GLfloat _DeltaTime, float _Speed);
 
 	void doFrame();
 };
