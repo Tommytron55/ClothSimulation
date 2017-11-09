@@ -18,17 +18,12 @@ private:
 	void makeConstraint(Particle *p1, Particle *p2) { constraints.push_back(Constraint(p1, p2)); }
 
 	Utils Util;
-	/* A private method used by drawShaded() and addWindForcesForTriangle() to retrieve the
-	normal vector of the triangle defined by the position of the particles p1, p2, and p3.
-	The magnitude of the normal vector is equal to the area of the parallelogram defined by p1, p2 and p3
-	*/
+
 	glm::vec3 calcTriangleNormal(Particle *p1, Particle *p2, Particle *p3);
 
-	/* A private method used by windForce() to calcualte the wind force for a single triangle
-	defined by p1,p2,p3*/
+
 	void addWindForcesForTriangle(Particle *p1, Particle *p2, Particle *p3, const glm::vec3 direction);
 
-	/* A private method used by drawShaded(), that draws a single triangle p1,p2,p3 with a color*/
 	void drawTriangle(Particle *p1, Particle *p2, Particle *p3, const glm::vec3 color);
 
 public:
@@ -109,16 +104,6 @@ public:
 	Cloth();
 	~Cloth();
 
-	/* drawing the cloth as a smooth shaded (and colored according to column) OpenGL triangular mesh
-	Called from the display() method
-	The cloth is seen as consisting of triangles for four particles in the grid as follows:
-
-	(x,y)   *--* (x+1,y)
-	| /|
-	|/ |
-	(x,y+1) *--* (x+1,y+1)
-
-	*/
 	void drawShaded();
 
 	/* this is an important methods where the time is progressed one time step for the entire cloth.
@@ -132,10 +117,6 @@ public:
 	/* used to add wind forces to all particles, is added for each triangle since the final force is proportional to the triangle area as seen from the wind direction*/
 	void windForce(const glm::vec3 direction);
 
-	/* used to detect and resolve the collision of the cloth with the ball.
-	This is based on a very simples scheme where the position of each particle is simply compared to the sphere and corrected.
-	This also means that the sphere can "slip through" if the ball is small enough compared to the distance in the grid bewteen particles
-	*/
 	void ballCollision(const glm::vec3 center, const float radius);
 
 	void groundCollision(float _GroundHeight);

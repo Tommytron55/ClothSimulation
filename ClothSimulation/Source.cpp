@@ -41,7 +41,7 @@ Utils g_Util;
 
 bool RenderBall = false;
 
-int g_numOfHooks = 4;
+int g_numOfHooks = 2;
 int g_ParticlesWidthNum = 20;
 int g_ParticlesHeightNum = 15;
 int g_ClothWidth = 14;
@@ -125,30 +125,11 @@ void render(void)
 			std::cout << "x: " << x_rand << std::endl;
 			std::cout << "z: " << z_rand << std::endl;
 			break;
-		case Left:
-			//x_rand = rand() % 20;
-			//x_rand /= -5.0f;
-			//z_rand = rand() % 8;
-			//z_rand /= -10.0f;
-			//std::cout << "x: " << x_rand << std::endl;
-			////std::cout << "y: " << y_rand << std::endl;
-			break;
-		case Right:
-		//	x_rand = rand() % 20;
-		//	x_rand /= 5.0f;
-		//	z_rand = rand() % 8;
-		//	z_rand /= 10.0f;
-		//	std::cout << "x: " << x_rand << std::endl;
-		////	std::cout << "y: " << y_rand << std::endl;
-			break;
 		default:
 			break;
 		}
 	}
 	
-
-	//cloth1.addForce(glm::vec3(0, -0.5, 0)*g_DeltaTime); // add gravity each frame, pointing down
-	//cloth1->windForce(glm::vec3(0.25, 0, 0.1)*g_DeltaTime); // generate some wind each frame
 
 	cloth1->addForce(glm::vec3(0, -9.81f, 0)*g_DeltaTime * 0.75f); // add gravity each frame, pointing down
 	cloth1->windForce(glm::vec3(x_rand, y_rand, z_rand)*g_DeltaTime * g_WindSpeed); // generate some wind each frame
@@ -197,25 +178,12 @@ void render(void)
 		glPopMatrix();
 	
 	}
-	//Drawing Tea cup
-	glPushMatrix(); 
-	glTranslatef(10.0f, -12.0f, -15.0f); // hence the translation of the sphere onto the ball position
-	glColor3f(0.5f, 0.1f, 0.5f);
-	glutSolidTeacup(5.0f);
-	glPopMatrix();
-
-	//Drawing Tea cup
-	glPushMatrix();
-	glTranslatef(0.0f, -10.0f, -15.0f); // hence the translation of the sphere onto the ball position
-	glColor3f(0.5f, 0.1f, 0.5f);
-	glutSolidTeapot(5.0f);
-	glPopMatrix();
 
 	//Drawing Floor
 	glPushMatrix();
-	glTranslatef(0.0f, -65.2f, 0.0f); // hence the translation of the sphere onto the ball position
+	glTranslatef(0.0f, -90.2f, 0.0f); // hence the translation of the sphere onto the ball position
 	glColor3f(0.15f, 0.4f, 0.35f);
-	glutSolidCube(100.0f);
+	glutSolidCube(150.0f);
 	glPopMatrix();
 
 	glutSwapBuffers();
@@ -277,7 +245,8 @@ void keyboard(unsigned char key, int x, int y)
 		std::cout << "R - Pressed" << std::endl;
 		delete cloth1;
 		g_WindSpeed = 3.0f;
-		g_numOfHooks = 4;
+		g_numOfHooks = 2;
+		RenderBall = false;
 		cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class
 		break;
 	case 99: //c
@@ -329,7 +298,7 @@ void arrow_keys(int a_keys, int x, int y)
 	switch (a_keys) {
 	case GLUT_KEY_DOWN:
 		//glutFullScreen();
-		if (g_ClothHeight < 16) {
+		if (g_ClothHeight < 15) {
 			g_ClothHeight++;
 			delete cloth1;
 			cloth1 = new Cloth(g_ClothWidth, g_ClothHeight, g_ParticlesWidthNum, g_ParticlesHeightNum, g_numOfHooks); // one Cloth object of the Cloth class

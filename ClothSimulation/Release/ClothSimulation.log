@@ -1,0 +1,27 @@
+﻿  Source.cpp
+d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\Cloth.h(101): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Source.cpp(85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+Source.cpp(88): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+Source.cpp(88): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+Source.cpp(89): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+Source.cpp(89): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+Source.cpp(113): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+Source.cpp(115): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+Source.cpp(121): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+Source.cpp(123): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+Source.cpp(155): warning C4305: 'argument': truncation from 'double' to 'float'
+Source.cpp(228): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+Source.cpp(269): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+Source.cpp(279): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+Source.cpp(287): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+Source.cpp(323): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+Source.cpp(331): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+Source.cpp(338): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+Source.cpp(345): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating code
+  1 of 251 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    8 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  ClothSimulation.vcxproj -> D:\Users\thomas.mal6932\Documents\repos\Cloth Simulation\Release\ClothSimulation.exe
+  ClothSimulation.vcxproj -> D:\Users\thomas.mal6932\Documents\repos\Cloth Simulation\Release\ClothSimulation.pdb (Full PDB)

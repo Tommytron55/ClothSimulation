@@ -11,13 +11,13 @@ d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.
 d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(121): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
 d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(123): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
 d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(155): warning C4305: 'argument': truncation from 'double' to 'float'
-d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(241): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
-d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(281): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(291): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(299): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(335): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(343): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(350): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(357): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(228): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(269): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(279): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(287): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(323): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(331): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(338): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\users\thomas.mal6932\documents\repos\cloth simulation\clothsimulation\source.cpp(345): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   ClothSimulation.vcxproj -> D:\Users\thomas.mal6932\Documents\repos\Cloth Simulation\Debug\ClothSimulation.exe
   ClothSimulation.vcxproj -> D:\Users\thomas.mal6932\Documents\repos\Cloth Simulation\Debug\ClothSimulation.pdb (Partial PDB)
